@@ -16,6 +16,11 @@ struct Employee {
     double netSalary;
 };
 
+void clearScreen() {
+    system("cls");
+}
+
+
 Employee emp[100];
 int countEmp = 0;
 
@@ -49,9 +54,19 @@ void addEmployee() {
 
     emp[countEmp].tax = emp[countEmp].basicSalary * 0.05;
     emp[countEmp].netSalary = emp[countEmp].basicSalary + emp[countEmp].allowance - emp[countEmp].tax;
+int posit = 0;
+while (posit < countEmp && emp[posit].id < emp[countEmp].id) {
+    posit++;
+}
+Employee temp = emp[countEmp];
+for (int i = countEmp; i > posit; i--) {
+    emp[i] = emp[i - 1];
+}
+emp[posit] = temp;
+countEmp++;
 
-    countEmp++;
-    cout << "\nEmployee Added Successfully!\n";
+     cout << "\nEmployee Added Successfully!\n";
+    clearScreen();
 }
 
 void displayEmployees() {
@@ -101,22 +116,28 @@ void searchEmployee() {
     }
     cout << "\nRecord Not Found\n";
 }
-
 void deleteEmployee() {
     int id;
+    char choice;
     cout << "\nEnter ID to Delete: ";
     cin >> id;
-
     for (int i = 0; i < countEmp; i++) {
         if (emp[i].id == id) {
-            for (int j = i; j < countEmp - 1; j++) {
-                emp[j] = emp[j + 1];
+        cout << "Are you sure you want to delete this ID?(Y/N): ";
+            cin >> choice;
+        if (choice=='Y' ||choice=='y') {
+                for (int j = i; j < countEmp - 1; j++) {
+                    emp[j] = emp[j + 1];
+                }
+                countEmp--;
+                cout << "\nRecord Deleted Successfully\n";
+            } else {
+                cout << "\nDelete Cancelled\n";
             }
-            countEmp--;
-            cout << "\nRecord Deleted Successfully\n";
             return;
         }
     }
+
     cout << "\nRecord Not Found\n";
 }
 
@@ -149,6 +170,7 @@ void updateEmployee() {
     cout << "\nRecord Not Found\n";
 }
 
+
 int main() {
     int choice;
 
@@ -164,11 +186,21 @@ int main() {
         cin >> choice;
 
         switch (choice) {
-            case 1: addEmployee(); break;
-            case 2: displayEmployees(); break;
-            case 3: searchEmployee(); break;
-            case 4: deleteEmployee(); break;
-            case 5: updateEmployee(); break;
+            case 1: 
+			clearScreen();
+			addEmployee(); break;
+            case 2: 
+			clearScreen();
+			displayEmployees(); break;
+            case 3: 
+			clearScreen();
+			searchEmployee(); break;
+            case 4: 
+			clearScreen();
+			deleteEmployee(); break;
+            case 5: 
+			clearScreen();
+			updateEmployee(); break;
             case 6: return 0;
             default: cout << "\nInvalid Choice\n";
         }
