@@ -37,7 +37,7 @@ void addEmployee() {
     cout << "Enter CNIC (13 digits without using '-'): ";
     cin >> emp[countEmp].cnic;
 
-    cout << "Enter Date of Joining(mm-dd-yyyy): ";
+    cout << "Enter Date of Joining(dd-mm-yyyy): ";
     cin >> emp[countEmp].dateOfJoining;
 
     cout << "Enter Basic Salary: ";
