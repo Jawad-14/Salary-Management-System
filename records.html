@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>All Employee Records</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+<h1>All Employee Records</h1>
+
+<div class="card">
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Father</th>
+<th>CNIC</th>
+<th>Department</th>
+<th>Grade</th>
+<th>Join Date</th>
+<th>Basic</th>
+<th>Allowance</th>
+<th>Deduction</th>
+<th>OT Hrs</th>
+<th>OT Rate</th>
+<th>OT Pay</th>
+<th>Tax</th>
+<th>Net Salary</th>
+</tr>
+</thead>
+<tbody id="recordsBody"></tbody>
+</table>
+</div>
+
+<button onclick="window.location.href='index.html'">Back</button>
+
+</div>
+
+<script>
+let employees = JSON.parse(localStorage.getItem("employees")) || [];
+let body = document.getElementById("recordsBody");
+
+employees.forEach(e=>{
+    body.innerHTML+=`
+    <tr>
+        <td>${e.id}</td>
+        <td>${e.name}</td>
+        <td>${e.father}</td>
+        <td>${e.cnic}</td>
+        <td>${e.dept}</td>
+        <td>${e.grade}</td>
+        <td>${e.date}</td>
+        <td>${e.basic}</td>
+        <td>${e.allowance}</td>
+        <td>${e.deduction}</td>
+        <td>${e.otH}</td>
+        <td>${e.otR}</td>
+        <td>${e.ot}</td>
+        <td>${e.tax}</td>
+        <td>${e.net}</td>
+    </tr>`;
+});
+</script>
+
+</body>
+</html>

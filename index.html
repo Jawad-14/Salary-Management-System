@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Salary Management System</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+<h1>Salary Management System</h1>
+
+<div class="card">
+<h2>Employee Form</h2>
+
+<div class="grid">
+<div class="field"><input id="id" required><label>Employee ID</label></div>
+<div class="field"><input id="empName" required><label>First Name</label></div>
+<div class="field"><input id="father" required><label>Last Name</label></div>
+<div class="field"><input id="cnic" required><label>CNIC</label></div>
+<div class="field"><input id="date" type="date" required><label>Date of Joining</label></div>
+<div class="field"><input id="department" required><label>Department</label></div>
+<div class="field"><input id="grade" maxlength="1" required><label>Grade</label></div>
+<div class="field"><input id="basic" type="number" required><label>Basic Salary</label></div>
+<div class="field"><input id="allowance" type="number" required><label>Allowance</label></div>
+<div class="field"><input id="deduction" type="number" required><label>Deduction</label></div>
+<div class="field"><input id="otHours" type="number" required><label>Overtime Hours</label></div>
+<div class="field"><input id="otRate" type="number" required><label>Overtime Rate</label></div>
+</div>
+
+<p class="error" id="errorGeneral"></p>
+<p class="error" id="errorGrade"></p>
+<p class="error" id="errorCNIC"></p>
+
+<button onclick="addEmployee()">Add Employee</button>
+<button class="update" onclick="updateEmployee()">Update Employee</button>
+<button onclick="window.location.href='records.html'">View All Records</button>
+</div>
+
+<div class="card">
+<h2>Search Employee</h2>
+<div class="field">
+<input id="searchId">
+<label>Employee ID</label>
+</div>
+<button onclick="searchEmployee()">Search</button>
+</div>
+
+<div class="card">
+<h2>Employee Records</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Department</th>
+<th>Basic Salary</th>
+<th>Allowance</th>
+<th>Deduction</th>
+<th>Overtime Hours</th>
+<th>Overtime Pay</th>
+<th>Tax</th>
+<th>Net Salary</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody id="tableBody"></tbody>
+</table>
+</div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
