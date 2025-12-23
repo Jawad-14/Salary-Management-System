@@ -17,24 +17,29 @@ struct Employee {
 };
 
 void clearScreen() {
-    system("cls");
+    system("cls");  
 }
-
 
 Employee emp[100];
 int countEmp = 0;
 
 void addEmployee() {
+    if (countEmp >= 100) {
+        cout << "\nEmployee limit reached!\n";
+        return;
+    }
+
     cout << "\nEnter Employee ID: ";
     cin >> emp[countEmp].id;
 
+    cin.ignore();
     cout << "Enter Name: ";
-    cin >> emp[countEmp].name;
+    getline(cin, emp[countEmp].name);
 
     cout << "Enter Father Name: ";
-    cin >> emp[countEmp].fatherName;
+    getline(cin, emp[countEmp].fatherName);
 
-    cout << "Enter CNIC (13 digits without using '-'): ";
+    cout << "Enter CNIC (13 digits without '-'): ";
     cin >> emp[countEmp].cnic;
 
     cout << "Enter Date of Joining(dd-mm-yyyy): ";
@@ -49,24 +54,27 @@ void addEmployee() {
     cout << "Enter Allowance: ";
     cin >> emp[countEmp].allowance;
 
+    cin.ignore();
     cout << "Enter Department: ";
-    cin >> emp[countEmp].department;
+    getline(cin, emp[countEmp].department);
 
     emp[countEmp].tax = emp[countEmp].basicSalary * 0.05;
-    emp[countEmp].netSalary = emp[countEmp].basicSalary + emp[countEmp].allowance - emp[countEmp].tax;
-int posit = 0;
-while (posit < countEmp && emp[posit].id < emp[countEmp].id) {
-    posit++;
-}
-Employee temp = emp[countEmp];
-for (int i = countEmp; i > posit; i--) {
-    emp[i] = emp[i - 1];
-}
-emp[posit] = temp;
-countEmp++;
+    emp[countEmp].netSalary =
+        emp[countEmp].basicSalary + emp[countEmp].allowance - emp[countEmp].tax;
 
-     cout << "\nEmployee Added Successfully!\n";
-    clearScreen();
+    int posit = 0;
+    while (posit < countEmp && emp[posit].id < emp[countEmp].id) {
+        posit++;
+    }
+
+    Employee temp = emp[countEmp];
+    for (int i = countEmp; i > posit; i--) {
+        emp[i] = emp[i - 1];
+    }
+    emp[posit] = temp;
+    countEmp++;
+
+    cout << "\nEmployee Added Successfully!\n";
 }
 
 void displayEmployees() {
@@ -88,7 +96,7 @@ void displayEmployees() {
         cout << "\nTax (5%): " << emp[i].tax;
         cout << "\nNet Salary: " << emp[i].netSalary;
         cout << "\nDepartment: " << emp[i].department;
-        cout << "\n------------------------";
+        cout << "\n------------------------\n";
     }
 }
 
@@ -116,16 +124,20 @@ void searchEmployee() {
     }
     cout << "\nRecord Not Found\n";
 }
+
 void deleteEmployee() {
     int id;
     char choice;
+
     cout << "\nEnter ID to Delete: ";
     cin >> id;
+
     for (int i = 0; i < countEmp; i++) {
         if (emp[i].id == id) {
-        cout << "Are you sure you want to delete this ID?(Y/N): ";
+            cout << "Are you sure you want to delete this ID? (Y/N): ";
             cin >> choice;
-        if (choice=='Y' ||choice=='y') {
+
+            if (choice == 'Y' || choice == 'y') {
                 for (int j = i; j < countEmp - 1; j++) {
                     emp[j] = emp[j + 1];
                 }
@@ -137,7 +149,6 @@ void deleteEmployee() {
             return;
         }
     }
-
     cout << "\nRecord Not Found\n";
 }
 
@@ -154,14 +165,16 @@ void updateEmployee() {
             cout << "Enter New Grade: ";
             cin >> emp[i].grade;
 
+            cin.ignore();
             cout << "Enter New Department: ";
-            cin >> emp[i].department;
+            getline(cin, emp[i].department);
 
             cout << "Enter New Allowance: ";
             cin >> emp[i].allowance;
 
             emp[i].tax = emp[i].basicSalary * 0.05;
-            emp[i].netSalary = emp[i].basicSalary + emp[i].allowance - emp[i].tax;
+            emp[i].netSalary =
+                emp[i].basicSalary + emp[i].allowance - emp[i].tax;
 
             cout << "\nRecord Updated!\n";
             return;
@@ -169,7 +182,6 @@ void updateEmployee() {
     }
     cout << "\nRecord Not Found\n";
 }
-
 
 int main() {
     int choice;
@@ -186,21 +198,11 @@ int main() {
         cin >> choice;
 
         switch (choice) {
-            case 1: 
-			clearScreen();
-			addEmployee(); break;
-            case 2: 
-			clearScreen();
-			displayEmployees(); break;
-            case 3: 
-			clearScreen();
-			searchEmployee(); break;
-            case 4: 
-			clearScreen();
-			deleteEmployee(); break;
-            case 5: 
-			clearScreen();
-			updateEmployee(); break;
+            case 1: clearScreen(); addEmployee(); break;
+            case 2: clearScreen(); displayEmployees(); break;
+            case 3: clearScreen(); searchEmployee(); break;
+            case 4: clearScreen(); deleteEmployee(); break;
+            case 5: clearScreen(); updateEmployee(); break;
             case 6: return 0;
             default: cout << "\nInvalid Choice\n";
         }
