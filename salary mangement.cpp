@@ -26,14 +26,27 @@ int countEmp = 0;
 
 void addEmployee() {
     cout << "\nEnter Employee ID: ";
-    cin >> emp[countEmp].id;
-
+    while (!(cin>>emp[countEmp].id)|| emp[countEmp].id<=0){
+        cout<<"Invalid Input Please enter a positive number: ";
+        cin.clear();
+        cin.ignore(1000, '\n');
+    }
+    cin.ignore();
     cout << "Enter Name: ";
-    cin >> emp[countEmp].name;
+    getline(cin, emp[countEmp].name);
+    while (emp[countEmp].name.empty()){
+        cout<<"Name cannot be Empty! Please enter a valid name: ";
+        getline(cin, emp[countEmp].name);
+    }
+    
+     cout << "Enter Father Name: ";
+     getline(cin, emp[countEmp].fatherName);
 
-    cout << "Enter Father Name: ";
-    cin >> emp[countEmp].fatherName;
-
+while (emp[countEmp].fatherName.empty()) {
+    cout << "Father name cannot be empty! Please enter a valid name: ";
+    getline(cin, emp[countEmp].fatherName);
+}
+    
     cout << "Enter CNIC (13 digits without using '-'): ";
     cin >> emp[countEmp].cnic;
 
@@ -41,31 +54,39 @@ void addEmployee() {
     cin >> emp[countEmp].dateOfJoining;
 
     cout << "Enter Basic Salary: ";
-    cin >> emp[countEmp].basicSalary;
+    while (!(cin>>emp[countEmp].basicSalary)||(emp[countEmp].basicSalary<0)){
+        cout<<"Invalid Input! Please enter a valid salary: ";
+        cin.clear();
+        cin.ignore(1000, '\n');
+    }
 
     cout << "Enter Grade: ";
     cin >> emp[countEmp].grade;
 
     cout << "Enter Allowance: ";
-    cin >> emp[countEmp].allowance;
+    while (!(cin>>emp[countEmp].allowance)||(emp[countEmp].allowance<0)){
+        cout<<"Invalid Input! Please enter a valid Allowance: ";
+        cin.clear();
+        cin.ignore(1000, '\n');
+    }
 
     cout << "Enter Department: ";
     cin >> emp[countEmp].department;
 
     emp[countEmp].tax = emp[countEmp].basicSalary * 0.05;
     emp[countEmp].netSalary = emp[countEmp].basicSalary + emp[countEmp].allowance - emp[countEmp].tax;
-int posit = 0;
-while (posit < countEmp && emp[posit].id < emp[countEmp].id) {
+    int posit = 0;
+    while (posit < countEmp && emp[posit].id < emp[countEmp].id) {
     posit++;
 }
-Employee temp = emp[countEmp];
-for (int i = countEmp; i > posit; i--) {
+    Employee temp = emp[countEmp];
+    for (int i = countEmp; i > posit; i--) {
     emp[i] = emp[i - 1];
 }
-emp[posit] = temp;
-countEmp++;
+    emp[posit] = temp;
+    countEmp++;
 
-     cout << "\nEmployee Added Successfully!\n";
+    cout << "\nEmployee Added Successfully!\n";
     clearScreen();
 }
 
