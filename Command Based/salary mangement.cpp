@@ -81,14 +81,27 @@ void loadFromFile() {
 void addEmployee() {
     clearScreen();
 
-    cout << "\nEnter Employee ID: ";
-    cin >> emp[countEmp].id;
-
+   cout << "\nEnter Employee ID: ";
+    while (!(cin>>emp[countEmp].id)|| emp[countEmp].id<=0){
+        cout<<"Invalid Input Please enter a positive number: ";
+        cin.clear();
+        cin.ignore(1000, '\n');
+    }
+    cin.ignore();
     cout << "Enter Name: ";
-    cin >> emp[countEmp].name;
+    getline(cin, emp[countEmp].name);
+    while (emp[countEmp].name.empty()){
+        cout<<"Name cannot be Empty! Please enter a valid name: ";
+        getline(cin, emp[countEmp].name);
+    }
 
     cout << "Enter Father Name: ";
-    cin >> emp[countEmp].fatherName;
+     getline(cin, emp[countEmp].fatherName);
+
+    while (emp[countEmp].fatherName.empty()) {
+    cout << "Father name cannot be empty! Please enter a valid name: ";
+    getline(cin, emp[countEmp].fatherName);
+}
 
     cout << "Enter CNIC: ";
     cin >> emp[countEmp].cnic;
@@ -97,13 +110,21 @@ void addEmployee() {
     cin >> emp[countEmp].dateOfJoining;
 
     cout << "Enter Basic Salary: ";
-    cin >> emp[countEmp].basicSalary;
+    while (!(cin>>emp[countEmp].basicSalary)||(emp[countEmp].basicSalary<0)){
+        cout<<"Invalid Input! Please enter a valid salary: ";
+        cin.clear();
+        cin.ignore(1000, '\n');
+    }
 
     cout << "Enter Grade: ";
     cin >> emp[countEmp].grade;
 
     cout << "Enter Allowance: ";
-    cin >> emp[countEmp].allowance;
+    while (!(cin>>emp[countEmp].allowance)||(emp[countEmp].allowance<0)){
+        cout<<"Invalid Input! Please enter a valid Allowance: ";
+        cin.clear();
+        cin.ignore(1000, '\n');
+    }
 
     cout << "Enter Deduction: ";
     cin >> emp[countEmp].deduction;
